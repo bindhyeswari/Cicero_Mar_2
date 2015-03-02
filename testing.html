@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        var movies = Array.prototype.slice.call(document.querySelectorAll('.list_item'));
+        movies.map(function (div) {
+            /// console.log(div);
+            return {
+                imgsrc: div.getElementsByTagName('img')[0].src,
+                title: div.getElementsByTagName('b')[0].textContent,
+                desc: div.getElementsByClassName('item_description').textContent,
+                aux: div.getElementsByClassName('secondary').textContent
+            }
+        });
+    </script>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/css/base.css"/>
+</head>
+<body>
+    <div ng-view></div>
+    <script src="/angular/angular.js"></script>
+    <script src="/angular-route/angular-route.js"></script>
+    <script>
+        angular.module('myApp', ['ngRoute']).config(function ($routeProvider) {
+            $routeProvider.when('/', {
+                templateUrl: '/partials/_list.html',
+                controller: 'ListMoviesController'
+            }).otherwise({
+                redirectTo: '/'
+            });
+        }).factory('MovieService', function ($http) {
+            return {
+                info: function () {
+                    return $http.get('/movies');
+                }
+            }
+        }).controller('ListMoviesController', function ($scope, MovieService) {
+            MovieService.info().success(function (data) {
+                $scope.movies = data;
+            });
+        });
+    </script>
+</body>
+</html>
